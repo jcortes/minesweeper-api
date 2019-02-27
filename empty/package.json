@@ -19,6 +19,10 @@
         "fileStorage": {
           "allowAccessFrom": "*"
         },
+        "identityProvider": {
+          "name": "https://jacortesmahmud.auth0.com/",
+          "certificate": "/server/keys/auth0"
+        },
         "node": {
           "environment": "development"
         }

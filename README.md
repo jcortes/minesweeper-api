@@ -1,34 +1,4 @@
 # minesweeper-api
-
-# model
-type User {
-  id: ID! @unique
-  email: String @unique
-  name: String!
-  games: [Game]
-}
-
-type Game {
-  id: ID! @unique
-  cols: Number,
-  rows: Number,
-  playingTime: Number,
-  mines: Number,
-  tiles: [Tile!]!,
-  player: User!,
-  isDone: Boolean!
-}
-
-type Tile {
-  id: ID!
-  isMine: Boolean!,
-  isRevealed: Boolean!,
-  row: Number!,
-  col: Number!,
-  game: Game!
-}
-
-# Description
 Diseñar un modelo usando conceptos DDD, 
 para poder crear un app con el framework Wolkenkit que usa CQRS, 
 Event Sourcing y NodeJS.
@@ -42,15 +12,10 @@ las celdas a los lados serán descubiertas tambien
 
 Capacidad de ponerle un flag a la celda ya sea con un signo de pregunta o
 una bandera roja
-```
-cell aggregate:
-  commands: [reveal, flag]
-  events: [revealed, flagged]
-```
 
 Debe haber un reloj con maximo de tiempo
 ```
-hourglass aggregate:
+timer aggregate:
   commands: [start, stop]
   events: [started, stopped]
 ```
@@ -63,18 +28,35 @@ Capacidad par configurar el juego con parametros como:
 * numero de columnas
 * numero de minas
 ```
-board aggregate:
+game aggregate:
   numberOfRows
   numberOfCols
   numberOfMines
-  commands: [start, end, save, resume, setRows, setColumns, setMines]
-  events: [started, ended, saved, resumed, rowsSet, columnsSet, minesSet]
+  squares: [
+    {
+      isMine: false, 
+      adjacentMines: 2, 
+      flagged: false, 
+      revealed: false, 
+      minesLocation: {
+        topLeft,
+        top,
+        topRight,
+        right,
+        bottomRight
+        bottom,
+        bottomLeft,
+        left,
+      }
+    },
+    ...
+  ]
+  commands: [start, cancel, revealSquare]
+  events: [started, canceled, squareRevealed, lost, won]
 ```
 
 Capacidad para soportar varios usuarios / cuentas
 ```
-user aggregate:
-  commands: [register, login]
-  events: [registered, loggedin]
+Take a look at auth0 service
 ```
 
