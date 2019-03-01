@@ -1,9 +1,9 @@
 {
-  "name": "wolkenkit-template-empty",
+  "name": "minesweeper-api",
   "version": "1.0.0",
-  "description": "wolkenkit-template-empty is an application template for wolkenkit.",
+  "description": "API made with wolkenkit.",
   "wolkenkit": {
-    "application": "sample",
+    "application": "minesweeper",
     "runtime": {
       "version": "3.1.0"
     },
@@ -36,5 +36,8 @@
   "keywords": [
     "wolkenkit"
   ],
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "wolkenkit-command-tools": "^3.0.0"
+  }
 }
