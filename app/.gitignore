@@ -9,4 +9,6 @@
 .DS_Store
 npm-debug.log
 
-!server/keys/auth0/certificate.pem
+# certificate.pem
+server/keys/auth0/*
+!server/keys/auth0/.gitkeep
