@@ -9,4 +9,4 @@
 .DS_Store
 npm-debug.log
 
-server/keys/auth0/certificate.pem
+!server/keys/auth0/certificate.pem
