@@ -2,27 +2,35 @@
 
 const fields = {
   nickname: { initalState: undefined },
-  numOfRows: { initalState: undefined },
-  numOfCols: { initalState: undefined },
-  numOfMines: { initalState: undefined },
+  rows: { initalState: undefined },
+  cols: { initalState: undefined },
+  mines: { initalState: undefined },
   squares: { initalState: undefined }
 };
 
 const projections = {
   "playing.game.started" (games, event) {
-    games.add({
-      nickname: event.data.nickname,
-      numOfRows: event.data.numOfRows,
-      numOfCols: event.data.numOfCols,
-      numOfMines: event.data.numOfMines,
-      squares: event.data.squares
-    });
+    const { nickname, rows, cols, mines, squares } = event.data;
+    games.add({ nickname, rows, cols, mines, squares });
   },
   "playing.game.canceled" (games, event) {
 
   },
   "playing.game.squareRevealed" (games, event) {
-
+    const { squares } = event.data;
+    const { id } = event.aggregate;
+    games.update({
+      where: { id },
+      set: { squares }
+    });
+  },
+  "playing.game.squareFlagged" (games, event) {
+    const { squares } = event.data;
+    const { id } = event.aggregate;
+    games.update({
+      where: { id },
+      set: { squares }
+    });
   },
   "playing.game.lost" (games, event) {
 
