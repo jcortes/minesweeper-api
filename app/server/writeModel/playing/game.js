@@ -5,7 +5,7 @@ const { only } = require("wolkenkit-command-tools");
 const initialState = {
   nickname: undefined,
   rows: 4,
-  rows: 4,
+  cols: 4,
   mines: 4,
   squares: [
     // -1 means there is a mine
@@ -115,8 +115,8 @@ const commands = {
       //     ? { ...square, flagged: true }
       //     : square
       // });
-      const newSquares = squares.map(square => 
-        (square.x === x && square.y === y)
+      const newSquares = squares.map(square =>
+        (square.x === x && square.y === y && !square.flagged)
           ? Object.assign({}, square, { flagged: true })
           : square
       );
